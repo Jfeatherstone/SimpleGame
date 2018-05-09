@@ -17,7 +17,7 @@ public class GameFrame extends JFrame {
 	
 	public static final int WIDTH = 760;
 	public static final int HEIGHT = 430;
-	
+	public static final String TITLE = "Title";
 	private JPanel contentPane;
 
 	public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class GameFrame extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */
+	 **/
 	
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,13 +44,14 @@ public class GameFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		setTitle(TITLE);
 		pack();
 
 		// Add the terminal panels that constitute the game GUI
 		GraphicsPanel gp = new GraphicsPanel();
 		gp.setBounds(0, 0, getWidth(), getHeight());
 		add(gp);
-				
+		
 	}
 
 }

@@ -17,36 +17,64 @@ public class GraphicsPanel extends JPanel {
 	 */
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private JLabel graphicTerminal;
-	private JLabel dialogueTerminal;
-	private JLabel infoTerminal;
+	private JLabel contextTerminal;
+	private JLabel combatTerminal;
 	private JLabel inventoryTerminal;
 	
-	private JLabel dialogWire;
-	private JLabel infoWire;
+	private JLabel contextWire;
+	private JLabel combatWire;
 	private JLabel inventoryWire;
 	
 	public GraphicsPanel() {
 		setPreferredSize(new Dimension(GameFrame.WIDTH, GameFrame.HEIGHT));
 		setLayout(null);
-		setBackground(Color.BLACK);
+		setBackground(Color.GRAY);
 		
 		graphicTerminal = new JLabel(new ImageIcon("Sprites/Display/GraphicsFrame.gif"));
 		graphicTerminal.setBounds(35, 20, 450, 250);
 		add(graphicTerminal);
 		
-		dialogueTerminal = new JLabel(new ImageIcon("Sprites/Display/DialogueFrame.png"));
-		dialogueTerminal.setBounds(530, 20, 190, 140);
-		add(dialogueTerminal);
+		contextTerminal = new JLabel(new ImageIcon("Sprites/Display/ContextFrame.png"));
+		contextTerminal.setBounds(530, 20, 190, 200);
+		add(contextTerminal);
 		
-		infoTerminal = new JLabel(new ImageIcon("Sprites/Display/InfoFrame.png"));
-		infoTerminal.setBounds(530, 185, 190, 150);
-		add(infoTerminal);
+		contextWire = new JLabel(new ImageIcon("Sprites/Display/ContextWire.png"));
+		contextWire.setBounds(0, 0, GameFrame.WIDTH, GameFrame.HEIGHT);
+		add(contextWire);
 		
-		JButton test4 = new JButton();
-		test4.setBounds(35, 305, 450, 80);
-		add(test4);
+		combatTerminal = new JLabel(new ImageIcon("Sprites/Display/CombatFrame.png"));
+		combatTerminal.setBounds(530, 245, 190, 140);
+		add(combatTerminal);
+		
+		combatWire = new JLabel(new ImageIcon("Sprites/Display/CombatWire.png"));
+		combatWire.setBounds(0,  0,  GameFrame.WIDTH, GameFrame.HEIGHT);
+		add(combatWire);
+		
+		inventoryTerminal = new JLabel(new ImageIcon("Sprites/Display/InventoryFrame.png"));
+		inventoryTerminal.setBounds(35, 305, 450, 80);
+		add(inventoryTerminal);
+		
+		inventoryWire = new JLabel(new ImageIcon("Sprites/Display/InventoryWire.png"));
+		inventoryWire.setBounds(0, 0, GameFrame.WIDTH, GameFrame.HEIGHT);
+		add(inventoryWire);
+		
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				animateInventoryWire();
+			}
+		}.start();
 
+	}
+	
+	public void animateInventoryWire() {
+		inventoryWire.setIcon(new ImageIcon("Sprites/Display/InventoryWire.gif"));
 	}
 }
