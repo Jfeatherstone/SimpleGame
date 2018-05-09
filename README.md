@@ -32,3 +32,4 @@ Rough outline of what will be in the game:
   
       -No clue here
     
+![picture](https://raw.githubusercontent.com/Jfeatherstone/TextAdventure/foundation/Examples/window_test.png)
