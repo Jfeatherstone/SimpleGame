@@ -4,14 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class GameFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final int WIDTH = 760;
+	public static final int HEIGHT = 430;
 	
 	private JPanel contentPane;
 
@@ -31,30 +36,21 @@ public class GameFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(740, 410));
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		pack();
-		
-		JButton test = new JButton();
-		test.setBounds(20, 20, 450, 210);
-		add(test);
-		
-		JButton test2 = new JButton();
-		test2.setBounds(510, 20, 190, 140);
-		add(test2);
-		
-		JButton test3 = new JButton();
-		test3.setBounds(510, 185, 190, 150);
-		add(test3);
-		
-		JButton test4 = new JButton();
-		test4.setBounds(70, 255, 400, 80);
-		add(test4);
+
+		// Add the terminal panels that constitute the game GUI
+		GraphicsPanel gp = new GraphicsPanel();
+		gp.setBounds(0, 0, getWidth(), getHeight());
+		add(gp);
+				
 	}
 
 }
