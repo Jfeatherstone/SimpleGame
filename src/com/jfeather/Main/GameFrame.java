@@ -1,6 +1,7 @@
 package com.jfeather.Main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -10,6 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.jfeather.Character.Player;
+import com.jfeather.Character.PlayerInstance;
+import com.jfeather.Game.GameTerminal;
+import com.jfeather.Game.LevelInstance;
 
 public class GameFrame extends JFrame {
 
@@ -32,7 +38,7 @@ public class GameFrame extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
 	 **/
@@ -46,12 +52,19 @@ public class GameFrame extends JFrame {
 		setContentPane(contentPane);
 		setTitle(TITLE);
 		pack();
+		setBackground(Color.BLACK);
+		
+		// Add the gameplay terminal instance
+		GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
+		gt.setBounds(55, 36, GameTerminal.WIDTH, GameTerminal.HEIGHT);
+		add(gt);
+		System.out.println(gt.getWidth());
 
 		// Add the terminal panels that constitute the game GUI
 		GraphicsPanel gp = new GraphicsPanel();
 		gp.setBounds(0, 0, getWidth(), getHeight());
-		add(gp);
+		//add(gp);
+		
 		
 	}
-
 }

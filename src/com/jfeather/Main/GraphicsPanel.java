@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -30,7 +29,8 @@ public class GraphicsPanel extends JPanel {
 	public GraphicsPanel() {
 		setPreferredSize(new Dimension(GameFrame.WIDTH, GameFrame.HEIGHT));
 		setLayout(null);
-		setBackground(Color.GRAY);
+		//setBackground(Color.GRAY);
+		setOpaque(false);
 		
 		graphicTerminal = new JLabel(new ImageIcon("Sprites/Display/GraphicsFrame.gif"));
 		graphicTerminal.setBounds(35, 20, 450, 250);
@@ -60,18 +60,6 @@ public class GraphicsPanel extends JPanel {
 		inventoryWire.setBounds(0, 0, GameFrame.WIDTH, GameFrame.HEIGHT);
 		add(inventoryWire);
 		
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				animateInventoryWire();
-			}
-		}.start();
-
 	}
 	
 	public void animateInventoryWire() {
