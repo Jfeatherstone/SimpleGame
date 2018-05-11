@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -16,6 +17,7 @@ import com.jfeather.Character.Player;
 import com.jfeather.Character.PlayerInstance;
 import com.jfeather.Game.GameTerminal;
 import com.jfeather.Game.LevelInstance;
+import com.jfeather.Inventory.InventoryTerminal;
 
 public class GameFrame extends JFrame {
 
@@ -25,7 +27,7 @@ public class GameFrame extends JFrame {
 	public static final int HEIGHT = 430;
 	public static final String TITLE = "Title";
 	private JPanel contentPane;
-
+	private JLayeredPane layeredPane;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,18 +55,22 @@ public class GameFrame extends JFrame {
 		setTitle(TITLE);
 		pack();
 		setBackground(Color.BLACK);
-		
+				
 		// Add the gameplay terminal instance
 		GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
 		gt.setBounds(55, 36, GameTerminal.WIDTH, GameTerminal.HEIGHT);
 		add(gt);
-		System.out.println(gt.getWidth());
+		
+		// Add the inventory terminal instance
+		InventoryTerminal it = new InventoryTerminal();
+		it.setBounds(47, 317, InventoryTerminal.WIDTH, InventoryTerminal.HEIGHT);
 
 		// Add the terminal panels that constitute the game GUI
 		GraphicsPanel gp = new GraphicsPanel();
 		gp.setBounds(0, 0, getWidth(), getHeight());
-		//add(gp);
-		
-		
+		add(gp);
+		add(it);
+
+
 	}
 }

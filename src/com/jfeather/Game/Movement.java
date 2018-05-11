@@ -27,7 +27,6 @@ public class Movement extends AbstractAction {
 		direction = moveDirection;
 		level = newLevel;
 		player = level.getPlayer();
-        //d = (int) 3.5 + level.getPlayer().getCharacter().getAgility() / 10;
 		d = 5;
 	}
 	
@@ -38,28 +37,28 @@ public class Movement extends AbstractAction {
 		case 0:
 			// Pressed Left
 			//System.out.println("Pressed Left");
-			level.setdX(d);
+			player.setdX(-d);
 			player.setLeft(true);
 			player.setDirection(PlayerInstance.DIR_LEFT);
 			break;
 		case 1:
 			// Pressed Right
 			//System.out.println("Pressed Right");
-			level.setdX(-d);
+			player.setdX(d);
 			player.setRight(true);
 			player.setDirection(PlayerInstance.DIR_RIGHT);
 			break;
 		case 2:
 			// Pressed Up
 			//System.out.println("Pressed Up");
-			level.setdY(d);
+			player.setdY(-d);
 			player.setUp(true);
 			player.setDirection(PlayerInstance.DIR_UP);
 			break;
 		case 3:
 			// Pressed Down
 			//System.out.println("Pressed Down");
-			level.setdY(-d);
+			player.setdY(d);
 			player.setDown(true);
 			player.setDirection(PlayerInstance.DIR_DOWN);
 			break;
@@ -67,21 +66,21 @@ public class Movement extends AbstractAction {
 			// Released Left
 			//System.out.println("Released Left");
 			if (!player.getRight())
-				level.setdX(0);
+				player.setdX(0);
 			player.setLeft(false);
 			break;
 		case 5:
 			// Released Right
 			//System.out.println("Released Right");
 			if (!player.getLeft())
-				level.setdX(0);
+				player.setdX(0);
 			player.setRight(false);
 			break;
 		case 6:
 			// Released Up
 			//System.out.println("Released Up");
 			if (!player.getDown())
-				level.setdY(0);
+				player.setdY(0);
 			player.setUp(false);
 			break;
 		case 7:
@@ -89,7 +88,7 @@ public class Movement extends AbstractAction {
 			//System.out.println("Released Down");
 			//System.out.println(level.getDown());
 			if (!player.getUp())
-				level.setdY(0);
+				player.setdY(0);
 			player.setDown(false);
 			break;
 		}

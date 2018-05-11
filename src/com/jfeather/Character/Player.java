@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 public class Player {
 
 	private int health, maxHealth, stamina, maxStamina;
-	private int level;
 	private String name;
 	private Image sprite;
 	
@@ -15,7 +14,6 @@ public class Player {
 	
 	public Player(String playerName) {
 		name = playerName;
-		level = 1;
 		
 		maxHealth = 100;
 		health = maxHealth;
@@ -34,24 +32,7 @@ public class Player {
 	
 	public void setSprite(String path) {
 		sprite = (new ImageIcon(path)).getImage();
-	}
-	
-	public int getLevel() {
-		return level;
-	}
-	
-	public void setLevel(int newLevel) {
-		if (level < newLevel) {
-			for (int i = level; i < newLevel; i++) {
-				levelUp();
-			}
-		} else {
-			level = 0;
-			for (int i = 0; i < newLevel; i++) {
-				levelUp();
-			}
-		}
-	}
+	}	
 
 	public String getName() {
 		return name;
@@ -91,10 +72,6 @@ public class Player {
 	
 	public void setMaxStamina(int newMaxStamina) {
 		maxStamina = newMaxStamina;
-	}
-	
-	public void levelUp() {
-		// TODO get the math for the level up stat increases
 	}
 	
 }

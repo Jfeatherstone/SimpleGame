@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -49,6 +50,8 @@ public class GameTerminal extends JPanel {
 		level = newLevel;
 		player = level.getPlayer();
 		initializeKeys();
+		
+		level.addNewObstacle(new ImageIcon("Sprites/Backpack.png").getImage(), 50, 50);
 		
 		Timer gameLoop = new Timer(UPDATE_RATE, new Listener());
 		gameLoop.start();
@@ -92,6 +95,9 @@ public class GameTerminal extends JPanel {
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		player.updateSprite(g, this);
+		//g2d.drawImage(player.getSprite(), player.getX(), player.getY(), null);
+		player.move(level);
+		level.repaintLevel(g2d);
 	}
 	
 	private class Listener implements ActionListener {
@@ -101,6 +107,7 @@ public class GameTerminal extends JPanel {
 			// This method is run continuously on the timer made above
 			//level.move(getGraphics());
 			repaint();
+			//System.out.println(System.currentTimeMillis());
 		}
 		
 	}	

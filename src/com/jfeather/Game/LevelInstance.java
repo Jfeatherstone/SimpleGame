@@ -14,12 +14,19 @@ public class LevelInstance {
 
 	private HashMap<Integer, Image> sprites;
 	private HashMap<Integer, ArrayList<Integer>> spriteLocations;
-	private int mapCount;
+	private HashMap<Integer, Image> obstacles;
+	private HashMap<Integer, ArrayList<Integer>> obstacleLocations;
+	private int spriteCount, obstacleCount;
 	private int x, y, dx, dy;
 	private PlayerInstance player;
 	
 	public LevelInstance(PlayerInstance newPlayer) {
 		player = newPlayer;
+		
+		sprites = new HashMap<>();
+		spriteLocations = new HashMap<>();
+		obstacles = new HashMap<>();
+		obstacleLocations = new HashMap<>();
 	}
 	
 	public int getdX() {
@@ -46,25 +53,25 @@ public class LevelInstance {
 	}
 	
 	public void addImage(Image newSprite, int xCoord, int yCoord) {
-		sprites.put(mapCount, newSprite);
-		spriteLocations.put(mapCount, new ArrayList<Integer> (Arrays.asList(xCoord, yCoord)));
-		mapCount++;
+		sprites.put(spriteCount, newSprite);
+		spriteLocations.put(spriteCount, new ArrayList<Integer> (Arrays.asList(xCoord, yCoord)));
+		spriteCount++;
 	}
 	
 	public void addImage(Image newSprite, ArrayList<Integer> list) {
-		sprites.put(mapCount, newSprite);
-		spriteLocations.put(mapCount, list);
-		mapCount++;
+		sprites.put(spriteCount, newSprite);
+		spriteLocations.put(spriteCount, list);
+		spriteCount++;
 	}
 	
 	public void addImage(Image newSprite) {
-		sprites.put(mapCount, newSprite);
-		spriteLocations.put(mapCount, getCoords());
-		mapCount++;
+		sprites.put(spriteCount, newSprite);
+		spriteLocations.put(spriteCount, getCoords());
+		spriteCount++;
 	}
 	
 	public int getMapCount() {
-		return mapCount;
+		return spriteCount;
 	}
 	
 	public HashMap<Integer, Image> getSpriteMap() {
@@ -92,8 +99,8 @@ public class LevelInstance {
 	}
 	
     public void repaintLevel(Graphics2D g2d) {
-    	Iterator it = sprites.entrySet().iterator();
-    	Iterator it2 = spriteLocations.entrySet().iterator();
+    	Iterator it = obstacles.entrySet().iterator();
+    	Iterator it2 = obstacleLocations.entrySet().iterator();
     	while (it.hasNext()) {
     		Map.Entry<Integer, Image> nextImage = (Map.Entry<Integer, Image>) it.next();
     		Map.Entry<Integer, ArrayList<Integer>> nextPoint = (Map.Entry<Integer, ArrayList<Integer>>) it2.next();
@@ -103,7 +110,19 @@ public class LevelInstance {
     		g2d.drawImage(image, x, y, null);
     	}
     }
+    
+    public void addNewObstacle(Image obstacleSprite, int xPos, int yPos) {
+    	obstacles.put(obstacleCount, obstacleSprite);
+    	obstacleLocations.put(obstacleCount, new ArrayList<Integer>(Arrays.asList(xPos, yPos)));
+    }
 
+    public HashMap<Integer, Image> getObstacles() {
+    	return obstacles;
+    }
+    
+    public HashMap<Integer, ArrayList<Integer>> getObstacleLocations() {
+    	return obstacleLocations;
+    }
 
 
 }

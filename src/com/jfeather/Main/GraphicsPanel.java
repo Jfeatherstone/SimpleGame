@@ -18,6 +18,8 @@ public class GraphicsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel graphicTerminal;
+	private JLabel graphicTerminalPanel;
+	private JLabel graphicTerminalScreen;
 	private JLabel contextTerminal;
 	private JLabel combatTerminal;
 	private JLabel inventoryTerminal;
@@ -31,10 +33,18 @@ public class GraphicsPanel extends JPanel {
 		setLayout(null);
 		//setBackground(Color.GRAY);
 		setOpaque(false);
-		
-		graphicTerminal = new JLabel(new ImageIcon("Sprites/Display/GraphicsFrame.gif"));
+		/*
+		graphicTerminal = new JLabel(new ImageIcon("Sprites/Display/GraphicsFrame.png"));
 		graphicTerminal.setBounds(35, 20, 450, 250);
 		add(graphicTerminal);
+		*/
+		graphicTerminalScreen = new JLabel(new ImageIcon("Sprites/Display/GraphicsFrameScreen.png"));
+		graphicTerminalScreen.setBounds(35, 20, 450, 196);
+		add(graphicTerminalScreen);
+		
+		graphicTerminalPanel = new JLabel(new ImageIcon("Sprites/Display/GraphicsFramePanel.gif"));
+		graphicTerminalPanel.setBounds(35, 216, 450, 54);
+		add(graphicTerminalPanel);
 		
 		contextTerminal = new JLabel(new ImageIcon("Sprites/Display/ContextFrame.png"));
 		contextTerminal.setBounds(530, 20, 190, 200);

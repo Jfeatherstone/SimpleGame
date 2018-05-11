@@ -4,17 +4,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 import com.jfeather.Game.GameTerminal;
+import com.jfeather.Game.LevelInstance;
 
 public class PlayerInstance {
 
 	private boolean right, left, up, down;
 	private Image sprite;
 	private int direction;
-	private int x, y;
+	private int x, y, dx, dy;
 	private Player player;
 	private double angle;
 	
@@ -31,7 +36,7 @@ public class PlayerInstance {
 		up = false;
 		down = false;
 		direction = DIR_UP;
-		player.setSprite("Sprites/Player/Player.png");
+		//player.setSprite("Sprites/Player/Player.png");
 		sprite = player.getSprite();
 		
 		x = GameTerminal.WIDTH / 2 - sprite.getWidth(null) / 2;
@@ -110,6 +115,30 @@ public class PlayerInstance {
 		sprite = newSprite;
 	}
 	
+	public int getdX() {
+		return dx;
+	}
+	
+	public void setdX(int newdX) {
+		dx = newdX;
+	}
+
+	public int getdY() {
+		return dy;
+	}
+	
+	public void setdY(int newdY) {
+		dy = newdY;
+	}
+	
+	public void move(LevelInstance level) {
+		System.out.println(x + " " + y);
+		if (x+dx > 0 && x+dx+sprite.getWidth(null) < GameTerminal.WIDTH && !isObstacleInX(level.getObstacles(), level.getObstacleLocations()));
+			x += dx;
+		if (y+dy > 0 && y+dy+sprite.getHeight(null) < GameTerminal.HEIGHT && !isObstacleInY(level.getObstacles(), level.getObstacleLocations()))
+			y += dy;
+	}
+	
     public void updateSprite(Graphics g, JPanel dialog) {
     	
     	Graphics2D g2d = (Graphics2D) g;
@@ -155,9 +184,42 @@ public class PlayerInstance {
     			}
     		}
     	}
+    	AffineTransform og = g2d.getTransform();
     	AffineTransform tr = AffineTransform.getRotateInstance(angle, x + sprite.getWidth(null) / 2, y + sprite.getHeight(null) / 2);
     	g2d.setTransform(tr);
     	g2d.drawImage(sprite, x, y, null);
+    	g2d.setTransform(og);
     }
+    
+    public boolean isObstacleInX(HashMap<Integer, Image> obstacleMap, HashMap<Integer, ArrayList<Integer>> obstacleLocationMap) {
+    	Iterator it = obstacleMap.entrySet().iterator();
+    	Iterator it2 = obstacleLocationMap.entrySet().iterator();
+    	while (it.hasNext()) {
+    		Map.Entry<Integer, Image> nextImage = (Map.Entry<Integer, Image>) it.next();
+    		Map.Entry<Integer, ArrayList<Integer>> nextPoint = (Map.Entry<Integer, ArrayList<Integer>>) it2.next();
+    		int obsX = nextPoint.getValue().get(0);
+    		int obsY = nextPoint.getValue().get(1);
+    		Image image = nextImage.getValue();
+    		if ((x + dx) > obsX && (x + dx) < obsX + image.getWidth(null) && y > obsY && y < obsY + image.getHeight(null))
+    			return true;
+    	}
+    	return false;
+    }
+    
+    public boolean isObstacleInY(HashMap<Integer, Image> obstacleMap, HashMap<Integer, ArrayList<Integer>> obstacleLocationMap) {
+    	Iterator it = obstacleMap.entrySet().iterator();
+    	Iterator it2 = obstacleLocationMap.entrySet().iterator();
+    	while (it.hasNext()) {
+    		Map.Entry<Integer, Image> nextImage = (Map.Entry<Integer, Image>) it.next();
+    		Map.Entry<Integer, ArrayList<Integer>> nextPoint = (Map.Entry<Integer, ArrayList<Integer>>) it2.next();
+    		int obsX = nextPoint.getValue().get(0);
+    		int obsY = nextPoint.getValue().get(1);
+    		Image image = nextImage.getValue();
+    		if (x > obsX && x < obsX + image.getWidth(null) && (y + dy) > obsY && (y + dy) < obsY + image.getHeight(null))
+    			return true;
+    	}
+    	return false;
+    }
+
 
 }
