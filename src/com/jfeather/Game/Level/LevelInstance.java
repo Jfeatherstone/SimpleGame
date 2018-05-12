@@ -2,6 +2,7 @@ package com.jfeather.Game.Level;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,9 @@ public class LevelInstance {
 	private HashMap<Integer, ArrayList<Integer>> spriteLocations;
 	private HashMap<Integer, Image> obstacles;
 	private HashMap<Integer, ArrayList<Integer>> obstacleLocations;
-	private int spriteCount, obstacleCount;
+	private ArrayList<Integer> obstaclePointsX;
+	private ArrayList<Integer> obstaclePointsY;
+	private int spriteCount, obstacleCount, pointCount;
 	private int x, y, dx, dy;
 	private PlayerInstance player;
 	
@@ -31,7 +34,11 @@ public class LevelInstance {
 		spriteLocations = new HashMap<>();
 		obstacles = new HashMap<>();
 		obstacleLocations = new HashMap<>();
+		obstaclePointsX = new ArrayList<>();
+		obstaclePointsY = new ArrayList<>();
+		pointCount = 0;
 		//setBackgroundTile(new ImageIcon("Sprites/Level/tile.png").getImage());
+		setTerrain(new ImageIcon("Sprites/New Piskel.png").getImage());
 	}
 	
 	public int getdX() {
@@ -186,6 +193,31 @@ public class LevelInstance {
     			 break;
     	 }
     	 setBackgroundTile(tile.getAbsolutePath());
+    }
+    
+    public void setTerrain(Image image) {
+    	BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+    	Graphics2D g2d = (Graphics2D) bi.createGraphics();
+    	g2d.drawImage(image, 0, 0, null);
+    	addImage(image, 0, 0);
+    	for (int i = 0; i < bi.getHeight(); i++) {
+    		for (int j = 0; j < bi.getWidth(); j++) {
+    	    	if (bi.getRGB(j, i) != 0) {
+    	    		obstaclePointsX.add(j);
+    	    		obstaclePointsY.add(i);
+    	    		pointCount++;
+    	    	}
+    		}
+    	}
+
+    }
+    
+    public ArrayList<Integer> getObstaclePointsX() {
+    	return obstaclePointsX;
+    }
+    
+    public ArrayList<Integer> getObstaclePointsY() {
+    	return obstaclePointsY;
     }
 
 }

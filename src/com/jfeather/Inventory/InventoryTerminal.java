@@ -2,11 +2,13 @@ package com.jfeather.Inventory;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class InventoryTerminal extends JPanel {
+public class InventoryTerminal extends JPanel implements MouseListener {
 
 	/**
 	 * 
@@ -33,6 +35,7 @@ public class InventoryTerminal extends JPanel {
 			buttons[i].setBounds(currX, 7, 42, 42);
 			buttons[i].setEnabled(false);
 			buttons[i].setText("" + (i + 1));
+			buttons[i].addMouseListener(this);
 			currX += 46;
 		}
 		
@@ -111,6 +114,43 @@ public class InventoryTerminal extends JPanel {
 			}
 		}.start();
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// Detect which inventory slot is being clicked
+		for (int i = 0; i < buttons.length; i++) {
+			if (buttons[i] == e.getComponent())
+				System.out.println(i + 1);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void switchButtons(JButton btn1, JButton btn2) {
+		ImageIcon temp = btn1.getIcon();
 	}
 
 }

@@ -2,5 +2,5 @@
 set_background_tile = Sprites/Level/BackgroundTiles/Tile.png # This sets a specific tile as background
 # set_background_tile = random # This sets a random tile to the background
 create_new_obstacle = Sprites/Backpack.png, 50, 70 # Follows the form imagePath, x coordinate, y coordinate
-create_new_obstacasdle = Sprites/Backpack.png, 80, 110
+create_new_obstacle = Sprites/Backpack.png, 80, 110
 # End Comment

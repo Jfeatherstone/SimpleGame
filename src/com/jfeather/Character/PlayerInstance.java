@@ -36,7 +36,6 @@ public class PlayerInstance {
 		up = false;
 		down = false;
 		direction = DIR_UP;
-		//player.setSprite("Sprites/Player/Player.png");
 		sprite = player.getSprite();
 		
 		x = GameTerminal.WIDTH / 2 - sprite.getWidth(null) / 2;
@@ -132,10 +131,9 @@ public class PlayerInstance {
 	}
 	
 	public void move(LevelInstance level) {
-		//System.out.println(x + " " + y);
-		if (x+dx > 0 && x+dx+sprite.getWidth(null) < GameTerminal.WIDTH && !isObstacleInX(level.getObstacles(), level.getObstacleLocations()))
+		if (x+dx > 0 && x+dx+sprite.getWidth(null) < GameTerminal.WIDTH && /*!isObstacleInX(level.getObstacles(), level.getObstacleLocations())*/ !obstaclePointInX(level.getObstaclePointsX(), level.getObstaclePointsY()))
 			x += dx;
-		if (y+dy > 0 && y+dy+sprite.getHeight(null) < GameTerminal.HEIGHT && !isObstacleInY(level.getObstacles(), level.getObstacleLocations()))
+		if (y+dy > 0 && y+dy+sprite.getHeight(null) < GameTerminal.HEIGHT && /*!isObstacleInY(level.getObstacles(), level.getObstacleLocations())*/ !obstaclePointInY(level.getObstaclePointsX(), level.getObstaclePointsY()))
 			y += dy;
 	}
 	
@@ -223,6 +221,30 @@ public class PlayerInstance {
     	}
     	return false;
     }
-
+    
+    public boolean obstaclePointInX(ArrayList<Integer> pointsX, ArrayList<Integer> pointsY) {
+    	int newX = x + dx;
+    	int newY = y + sprite.getHeight(null) / 2;
+    	if (dx > 0) {
+    		newX += sprite.getWidth(null);
+    	}
+    	for (int i = 0; i < pointsY.size(); i++) {
+    		if (newX == pointsX.get(i) && newY == pointsY.get(i))
+    			return true;
+    	}
+    	return false;
+    }
+    
+    public boolean obstaclePointInY(ArrayList<Integer> pointsX, ArrayList<Integer> pointsY) {
+    	int newX = x + sprite.getWidth(null) / 2;
+    	int newY = y + dy;
+    	if (dy > 0)
+    		newY += sprite.getHeight(null);
+    	for (int i = 0; i < pointsY.size(); i++) {
+    		if (newX == pointsX.get(i) && newY == pointsY.get(i))
+    			return true;
+    	}
+    	return false;
+    }
 
 }

@@ -81,13 +81,15 @@ public class LevelParse {
 					}
 				}
 			}
-			
+			br.close();
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "<html>Level txt file not found! <br>Check your path and try again.", "Invalid file", JOptionPane.ERROR_MESSAGE);
 			//e.printStackTrace();
 		} catch (IOException e2) {
-			e2.printStackTrace();
+			//e2.printStackTrace();
+			JOptionPane.showMessageDialog(null, e2.toString(), "IO Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
 		return instance;
 	}
 }

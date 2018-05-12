@@ -59,8 +59,8 @@ public class GameFrame extends JFrame {
 		setResizable(false);
 				
 		// Add the gameplay terminal instance
-		//GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
-		GameTerminal gt = new GameTerminal(LevelParse.parseLevelFromFile("TestLevel.txt", new PlayerInstance(new Player("Jack"))));
+		GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
+		//GameTerminal gt = new GameTerminal(LevelParse.parseLevelFromFile("TestLevel.txt", new PlayerInstance(new Player("Jack"))));
 		gt.setBounds(55, 36, GameTerminal.WIDTH, GameTerminal.HEIGHT);
 		add(gt);
 		
@@ -73,7 +73,6 @@ public class GameFrame extends JFrame {
 		gp.setBounds(0, 0, getWidth(), getHeight());
 		add(gp);
 		add(it);
-		//LevelParse.parseLevelFromFile("TestLevel.txt");
 
 	}
 }
