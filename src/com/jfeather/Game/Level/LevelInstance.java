@@ -38,7 +38,7 @@ public class LevelInstance {
 		obstaclePointsY = new ArrayList<>();
 		pointCount = 0;
 		//setBackgroundTile(new ImageIcon("Sprites/Level/tile.png").getImage());
-		setTerrain(new ImageIcon("Sprites/New Piskel.png").getImage());
+		//setTerrain(new ImageIcon("Sprites/New Piskel.png").getImage());
 	}
 	
 	public int getdX() {
