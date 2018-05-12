@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import com.jfeather.Game.GameTerminal;
-import com.jfeather.Game.LevelInstance;
+import com.jfeather.Game.Level.LevelInstance;
 
 public class PlayerInstance {
 
@@ -132,8 +132,8 @@ public class PlayerInstance {
 	}
 	
 	public void move(LevelInstance level) {
-		System.out.println(x + " " + y);
-		if (x+dx > 0 && x+dx+sprite.getWidth(null) < GameTerminal.WIDTH && !isObstacleInX(level.getObstacles(), level.getObstacleLocations()));
+		//System.out.println(x + " " + y);
+		if (x+dx > 0 && x+dx+sprite.getWidth(null) < GameTerminal.WIDTH && !isObstacleInX(level.getObstacles(), level.getObstacleLocations()))
 			x += dx;
 		if (y+dy > 0 && y+dy+sprite.getHeight(null) < GameTerminal.HEIGHT && !isObstacleInY(level.getObstacles(), level.getObstacleLocations()))
 			y += dy;
@@ -200,8 +200,11 @@ public class PlayerInstance {
     		int obsX = nextPoint.getValue().get(0);
     		int obsY = nextPoint.getValue().get(1);
     		Image image = nextImage.getValue();
-    		if ((x + dx) > obsX && (x + dx) < obsX + image.getWidth(null) && y > obsY && y < obsY + image.getHeight(null))
+    		
+    		if ((x + dx + sprite.getWidth(null)) > obsX && (x + dx) < obsX + image.getWidth(null) && y + sprite.getHeight(null) > obsY && y < obsY + image.getHeight(null))
     			return true;
+    		//if ( )
+    			//return true;
     	}
     	return false;
     }
@@ -215,7 +218,7 @@ public class PlayerInstance {
     		int obsX = nextPoint.getValue().get(0);
     		int obsY = nextPoint.getValue().get(1);
     		Image image = nextImage.getValue();
-    		if (x > obsX && x < obsX + image.getWidth(null) && (y + dy) > obsY && (y + dy) < obsY + image.getHeight(null))
+    		if (x + sprite.getWidth(null) > obsX && x < obsX + image.getWidth(null) && (y + dy + sprite.getHeight(null)) > obsY && (y + dy) < obsY + image.getHeight(null))
     			return true;
     	}
     	return false;

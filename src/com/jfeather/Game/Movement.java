@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import com.jfeather.Character.PlayerInstance;
+import com.jfeather.Game.Level.LevelInstance;
 
 public class Movement extends AbstractAction {
 

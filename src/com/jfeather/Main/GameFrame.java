@@ -16,7 +16,8 @@ import javax.swing.border.EmptyBorder;
 import com.jfeather.Character.Player;
 import com.jfeather.Character.PlayerInstance;
 import com.jfeather.Game.GameTerminal;
-import com.jfeather.Game.LevelInstance;
+import com.jfeather.Game.Level.LevelInstance;
+import com.jfeather.Game.Level.LevelParse;
 import com.jfeather.Inventory.InventoryTerminal;
 
 public class GameFrame extends JFrame {
@@ -55,9 +56,11 @@ public class GameFrame extends JFrame {
 		setTitle(TITLE);
 		pack();
 		setBackground(Color.BLACK);
+		setResizable(false);
 				
 		// Add the gameplay terminal instance
-		GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
+		//GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
+		GameTerminal gt = new GameTerminal(LevelParse.parseLevelFromFile("TestLevel.txt", new PlayerInstance(new Player("Jack"))));
 		gt.setBounds(55, 36, GameTerminal.WIDTH, GameTerminal.HEIGHT);
 		add(gt);
 		
@@ -70,7 +73,7 @@ public class GameFrame extends JFrame {
 		gp.setBounds(0, 0, getWidth(), getHeight());
 		add(gp);
 		add(it);
-
+		//LevelParse.parseLevelFromFile("TestLevel.txt");
 
 	}
 }

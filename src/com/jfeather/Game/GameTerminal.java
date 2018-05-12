@@ -15,6 +15,7 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 import com.jfeather.Character.PlayerInstance;
+import com.jfeather.Game.Level.LevelInstance;
 
 
 public class GameTerminal extends JPanel {
@@ -46,12 +47,10 @@ public class GameTerminal extends JPanel {
 	public GameTerminal(LevelInstance newLevel) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(null);
-		setBackground(Color.BLUE);
+		setBackground(Color.RED);
 		level = newLevel;
 		player = level.getPlayer();
 		initializeKeys();
-		
-		level.addNewObstacle(new ImageIcon("Sprites/Backpack.png").getImage(), 50, 50);
 		
 		Timer gameLoop = new Timer(UPDATE_RATE, new Listener());
 		gameLoop.start();
@@ -94,10 +93,10 @@ public class GameTerminal extends JPanel {
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		player.updateSprite(g, this);
+		level.repaintLevel(g2d);
 		//g2d.drawImage(player.getSprite(), player.getX(), player.getY(), null);
 		player.move(level);
-		level.repaintLevel(g2d);
+		player.updateSprite(g, this);
 	}
 	
 	private class Listener implements ActionListener {
