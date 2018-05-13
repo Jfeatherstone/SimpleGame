@@ -1,7 +1,11 @@
 package com.jfeather.Character;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class Player {
@@ -9,7 +13,7 @@ public class Player {
 	private int health, maxHealth, stamina, maxStamina;
 	private String name;
 	private Image sprite;
-	
+	private Image[] spriteSheet;
 	// TODO find out what stats will be in the game
 	
 	public Player(String playerName) {
@@ -19,7 +23,8 @@ public class Player {
 		health = maxHealth;
 		maxStamina = 100;
 		stamina = maxStamina;
-		setSprite("Sprites/Player/Player.png");
+		setSprite("Sprites/Player/Player.gif");
+		setSpriteSheet();
 	}
 	
 	public Image getSprite() {
@@ -30,9 +35,27 @@ public class Player {
 		sprite = newSprite;
 	}
 	
+	public Image[] getSpriteSheet() {
+		return spriteSheet;
+	}
+	
+	public void setSpriteSheet() {
+		try {
+			BufferedImage bf = ImageIO.read(new File("Sprites/Player/PlayerSheet.png"));
+			int width = bf.getWidth();
+			int height  = 13;
+			spriteSheet = new Image[9];
+			for (int i = 0; i < 9; i++) {
+				spriteSheet[i] = (Image) bf.getSubimage(0, height * i, width, height);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void setSprite(String path) {
 		sprite = (new ImageIcon(path)).getImage();
-	}	
+	}
 
 	public String getName() {
 		return name;

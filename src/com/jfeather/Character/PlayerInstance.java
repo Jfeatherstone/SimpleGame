@@ -22,6 +22,7 @@ public class PlayerInstance {
 	private int x, y, dx, dy;
 	private Player player;
 	private double angle;
+	private int imageCount;
 	
 	public static int DIR_LEFT = 0;
 	public static int DIR_RIGHT = 1;
@@ -29,6 +30,7 @@ public class PlayerInstance {
 	public static int DIR_DOWN = 3;
 
 	public PlayerInstance(Player newPlayer) {
+		imageCount = 0;
 		angle = 0;
 		player = newPlayer;
 		right = false;
@@ -138,7 +140,13 @@ public class PlayerInstance {
 	}
 	
     public void updateSprite(Graphics g, JPanel dialog) {
-    	
+    	imageCount++;
+    	//System.out.println(imageCount);
+    	if (imageCount > 16)
+    		imageCount = 0;
+    	player.setSprite(player.getSpriteSheet()[imageCount / 2]);
+		sprite = player.getSprite();
+
     	Graphics2D g2d = (Graphics2D) g;
     	
     	if (left && !right && !down && !up) {

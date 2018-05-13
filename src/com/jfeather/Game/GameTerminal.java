@@ -47,7 +47,7 @@ public class GameTerminal extends JPanel {
 	public GameTerminal(LevelInstance newLevel) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(null);
-		setBackground(Color.RED);
+		setBackground(Color.BLACK);
 		level = newLevel;
 		player = level.getPlayer();
 		initializeKeys();

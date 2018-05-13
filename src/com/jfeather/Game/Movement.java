@@ -28,7 +28,7 @@ public class Movement extends AbstractAction {
 		direction = moveDirection;
 		level = newLevel;
 		player = level.getPlayer();
-		d = 5;
+		d = 3;
 	}
 	
 	@Override

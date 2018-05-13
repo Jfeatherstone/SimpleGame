@@ -150,7 +150,7 @@ public class InventoryTerminal extends JPanel implements MouseListener {
 	}
 	
 	public void switchButtons(JButton btn1, JButton btn2) {
-		ImageIcon temp = btn1.getIcon();
+		//ImageIcon temp = btn1.getIcon();
 	}
 
 }
