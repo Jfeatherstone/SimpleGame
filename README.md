@@ -32,5 +32,5 @@ Rough outline of what will be in the game:
   
       -No clue here
     
-What the basic GUI will look like:
-![picture](https://raw.githubusercontent.com/Jfeatherstone/TextAdventure/foundation/Examples/window_test.png)
+What the basic GUI looks like:
+![picture](https://raw.githubusercontent.com/Jfeatherstone/TextAdventure/foundation/Examples/terminals.png)
