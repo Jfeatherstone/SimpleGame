@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -19,11 +20,12 @@ public class InventoryTerminal extends JPanel implements MouseListener {
 	public static final int HEIGHT = 56;
 	public static final int SLOTS = 8;
 	private JButton[] buttons;
+	private int slotPress;
 	
 	public InventoryTerminal() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(null);
-		setBackground(Color.BLUE);
+		setBackground(Color.GRAY);
 		
 		// Initialize the buttons as slots
 		int currX = 10;
@@ -38,6 +40,7 @@ public class InventoryTerminal extends JPanel implements MouseListener {
 			buttons[i].addMouseListener(this);
 			currX += 46;
 		}
+		
 		
 	}
 	
@@ -121,36 +124,55 @@ public class InventoryTerminal extends JPanel implements MouseListener {
 		// Detect which inventory slot is being clicked
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] == e.getComponent())
-				System.out.println(i + 1);
+				System.out.println("Clicked " + (i + 1));
 		}
 	}
-
+	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		slotPress = -1;
+		for (int i = 0; i < buttons.length; i++) {
+			if (buttons[i] == e.getComponent()) {
+				System.out.println(i + 1);
+				slotPress = i;
+			}
+		}
 		
 	}
 	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO This detection method doesn't quite work
+		int releaseSlot = -1;
+		for (int i = 0; i < buttons.length; i++) {
+			if (buttons[i] == e.getComponent()) {
+				System.out.println(i + 1);
+				releaseSlot = i;
+			}
+		}
+
+	}
+	
 	public void switchButtons(JButton btn1, JButton btn2) {
-		//ImageIcon temp = btn1.getIcon();
+		// Flip the icons
+		ImageIcon temp = (ImageIcon) btn1.getIcon();
+		btn1.setIcon(btn2.getIcon());
+		btn2.setIcon(temp);
+		
+		// TODO: Find out a good way to store items, maybe as a generic item class, like in Dungeon-Crawler
 	}
 
 }

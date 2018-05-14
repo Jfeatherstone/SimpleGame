@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +29,7 @@ public class GameFrame extends JFrame {
 	public static final int WIDTH = 760;
 	public static final int HEIGHT = 430;
 	public static final String TITLE = "Title";
-	private JPanel contentPane;
-	private JLayeredPane layeredPane;
+	private JLayeredPane contentPane;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,22 +48,25 @@ public class GameFrame extends JFrame {
 	 **/
 	
 	public GameFrame() {
+		JLayeredPane pane = new JLayeredPane();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		contentPane = new JPanel();
+		contentPane = new JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		setContentPane(pane);
 		setTitle(TITLE);
 		pack();
 		setBackground(Color.BLACK);
 		setResizable(false);
-		
+		Image icon = new ImageIcon("Sprites/Display/GameIcon.png").getImage();
+		setIconImage(icon);
+		 
 		// Add the gameplay terminal instance
 		GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
 		//GameTerminal gt = new GameTerminal(LevelParse.parseLevelFromFile("TestLevel.txt", new PlayerInstance(new Player("Jack"))));
 		gt.setBounds(55, 36, GameTerminal.WIDTH, GameTerminal.HEIGHT);
-		add(gt);
+		add(gt, 1);
 		
 		// Add the inventory terminal instance
 		InventoryTerminal it = new InventoryTerminal();
@@ -75,9 +78,10 @@ public class GameFrame extends JFrame {
 		// Add the terminal panels that constitute the game GUI
 		GraphicsPanel gp = new GraphicsPanel();
 		gp.setBounds(0, 0, getWidth(), getHeight());
-		add(gp);
-		add(it);
-		add(ct);
+		add(gp, 0);
+		add(it, 1);
+		add(ct, 1);
+		
 
 	}
 }

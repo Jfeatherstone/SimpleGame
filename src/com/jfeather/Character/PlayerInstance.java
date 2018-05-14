@@ -146,7 +146,7 @@ public class PlayerInstance {
     		imageCount = 0;
     	player.setSprite(player.getSpriteSheet()[imageCount / 2]);
 		sprite = player.getSprite();
-
+		
     	Graphics2D g2d = (Graphics2D) g;
     	
     	if (left && !right && !down && !up) {
