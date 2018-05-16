@@ -57,7 +57,7 @@ public class GameFrame extends JFrame {
 		setContentPane(pane);
 		setTitle(TITLE);
 		pack();
-		setBackground(Color.BLACK);
+		setBackground(Color.GRAY);
 		setResizable(false);
 		Image icon = new ImageIcon("Sprites/Display/GameIcon.png").getImage();
 		setIconImage(icon);

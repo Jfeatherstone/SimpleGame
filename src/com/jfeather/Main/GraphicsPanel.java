@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.jfeather.Context.ContextTerminal;
+
 public class GraphicsPanel extends JPanel {
 
 	/**
@@ -20,6 +22,7 @@ public class GraphicsPanel extends JPanel {
 	private JLabel graphicTerminalPanel;
 	private JLabel graphicTerminalScreen;
 	private JLabel contextTerminal;
+	private JLabel contextBackground;
 	private JLabel combatTerminal;
 	private JLabel inventoryTerminal;
 	
@@ -44,6 +47,10 @@ public class GraphicsPanel extends JPanel {
 		contextTerminal = new JLabel(new ImageIcon("Sprites/Display/ContextFrame.png"));
 		contextTerminal.setBounds(530, 20, 190, 200);
 		add(contextTerminal);
+		
+		contextBackground = new JLabel(new ImageIcon("Sprites/Display/ContextBackground.png"));
+		contextBackground.setBounds(538, 25, ContextTerminal.WIDTH, ContextTerminal.HEIGHT - 40);
+		//add(contextBackground);
 		
 		contextWire = new JLabel(new ImageIcon("Sprites/Display/ContextWire.png"));
 		contextWire.setBounds(0, 0, GameFrame.WIDTH, GameFrame.HEIGHT);

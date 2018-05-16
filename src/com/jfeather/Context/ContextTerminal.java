@@ -2,6 +2,8 @@ package com.jfeather.Context;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -9,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class ContextTerminal extends JPanel implements MouseListener {
 
@@ -24,7 +28,9 @@ public class ContextTerminal extends JPanel implements MouseListener {
 	private boolean tab1, tab2, tab3;
 	private ImageIcon[] selectedImages;
 	private ImageIcon[] unselectedImages;
-	private JPanel dialoguePanel, statsPanel;
+	private JPanel dialoguePanel, statsPanel, equipmentPanel;
+	JTextField inputField;
+	JLabel outputField;
 	
 	public ContextTerminal() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -34,6 +40,7 @@ public class ContextTerminal extends JPanel implements MouseListener {
 		setFocusable(false);
 		initDialoguePanel();
 		initStatsPanel();
+		initEquipmentPanel();
 		
 		tab1 = true;
 		tab2 = false;
@@ -67,10 +74,56 @@ public class ContextTerminal extends JPanel implements MouseListener {
 	
 	public void initDialoguePanel() {
 		dialoguePanel = new JPanel();
+		dialoguePanel.setLayout(null);
 		add(dialoguePanel);
 		dialoguePanel.setBounds(0, 0, WIDTH, HEIGHT);
 		dialoguePanel.setOpaque(false);
 		dialoguePanel.setFocusable(false);
+		
+		inputField = new JTextField();
+		inputField.setBounds(10, 128, 153, 20);
+		dialoguePanel.add(inputField);
+		inputField.setBackground(new Color(150, 150, 150));
+		
+		outputField = new JLabel("<html><font color='green'>");
+		outputField.setBounds(10, 20, 153, 103);
+		dialoguePanel.add(outputField);
+		outputField.setBackground(new Color(50, 50, 50));
+		outputField.setVerticalAlignment(JLabel.BOTTOM);
+		
+		inputField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input = inputField.getText();
+				// TODO Somehow prevent the String "</html>" from being registered, as it breaks the terminal (this way below doesn't quite work)
+				if (!input.equals("") || !input.trim().equals("</html>")) {
+					// TODO this spacing method here is kinda sketchy; it works for now, but I'm sure there is a much better way to do it
+					if (input.length() > 16) {
+						int count = 0, spaceIndex = 0;
+						boolean firstLine = true;
+						for (int i = 0; i < input.length(); i++) {
+							int maxCharsPerLine = 21;
+							if (firstLine) {
+								maxCharsPerLine = 9;
+								firstLine = false;
+							}
+							if (input.substring(i, i + 1).equals(" ") && count > maxCharsPerLine) {
+								input = input.substring(spaceIndex, i) + "<br>" + input.substring(i, input.length());
+								count = 0;
+							}
+							count++;
+						}
+					}
+
+					String newText = "<html><font color='green'>" + outputField.getText().substring(26, outputField.getText().length()) + "<br><font color='black'>[User]<font color='green'> " + input;
+					
+					outputField.setText(newText);
+					inputField.setText("");
+					inputField.setEnabled(false);
+					inputField.setEnabled(true);
+				}
+			}
+		});
 	}
 	
 	public void initStatsPanel() {
@@ -80,6 +133,15 @@ public class ContextTerminal extends JPanel implements MouseListener {
 		statsPanel.setOpaque(false);
 		statsPanel.setVisible(false);
 		statsPanel.setFocusable(false);
+	}
+	
+	public void initEquipmentPanel() {
+		equipmentPanel = new JPanel();
+		add(equipmentPanel);
+		equipmentPanel.setBounds(0, 0, WIDTH, HEIGHT);
+		equipmentPanel.setOpaque(false);
+		equipmentPanel.setVisible(false);
+		equipmentPanel.setFocusable(false);
 	}
 	
 	@Override
@@ -94,7 +156,8 @@ public class ContextTerminal extends JPanel implements MouseListener {
 			
 			dialoguePanel.setVisible(true);
 			statsPanel.setVisible(false);
-
+			equipmentPanel.setVisible(false);
+			
 		}
 		if (e.getComponent() == tabSelect[1] && !tab2) {
 			tab1 = false;
@@ -107,6 +170,7 @@ public class ContextTerminal extends JPanel implements MouseListener {
 			
 			dialoguePanel.setVisible(false);
 			statsPanel.setVisible(true);
+			equipmentPanel.setVisible(false);
 
 		}
 		if (e.getComponent() == tabSelect[2] && !tab3) {
@@ -117,6 +181,10 @@ public class ContextTerminal extends JPanel implements MouseListener {
 			tabSelect[0].setIcon(unselectedImages[0]);
 			tabSelect[1].setIcon(unselectedImages[1]);
 			tabSelect[2].setIcon(selectedImages[2]);
+
+			dialoguePanel.setVisible(false);
+			statsPanel.setVisible(false);
+			equipmentPanel.setVisible(true);
 
 		}
 
