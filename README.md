@@ -8,29 +8,40 @@ Rough outline of what will be in the game:
 
     -UI
   
-      -Game window with simple graphics
-    
-      -Text window to display what's going on in the game
-    
-        -List drops, events, dialogue, etc.
-      
-      -Maybe a stats screen or something to display equipment and character
-    
-      -An action panel to decide what to do (fight, talk, etc.)
+      -Game window with simple graphics (shown below)
+        -Context Window
+        
+            -List drops, events, dialogue, etc.
+            
+            -Will also show stats and weapon descriptions
+        
+        -Graphical Window
+        
+            -Shows basic game, maze-like rooms with enemies that have fixed paths
+        
+        -Inventory Window
+        
+            -Shows items
+        
+        -Combat Window
+        
+            -Shows user skills and health bars    
     
     -Gameplay
   
-      -Turn based combat based on level, weapon
+      -Turn based combat based on skill level and weapon
     
-      -Each weapon/type would have different attacks
+      -Each weapon/type would have different attacks / skills
     
       -Random loot drops from enemies
     
       -Bosses every now and again, somehow implemented in a consistent fasion
+      
+      -Equipment includes two weapons, armor, headpiece, and power source
     
     -Story
   
-      -No clue here
+      -Something about a hacker or something
     
 What the basic GUI looks like:
-![picture](https://raw.githubusercontent.com/Jfeatherstone/TextAdventure/foundation/Examples/terminals.png)
+![picture](https://raw.githubusercontent.com/Jfeatherstone/TextAdventure/foundation/Examples/updated_terminals.png)
