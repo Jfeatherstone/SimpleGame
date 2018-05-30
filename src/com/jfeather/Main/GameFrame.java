@@ -17,10 +17,14 @@ import javax.swing.border.EmptyBorder;
 import com.jfeather.Character.Player;
 import com.jfeather.Character.PlayerInstance;
 import com.jfeather.Context.ContextTerminal;
+import com.jfeather.Context.Text;
+import com.jfeather.Entities.Contour;
+import com.jfeather.Entities.Enemy;
 import com.jfeather.Game.GameTerminal;
 import com.jfeather.Game.Level.LevelInstance;
 import com.jfeather.Game.Level.LevelParse;
 import com.jfeather.Inventory.InventoryTerminal;
+import com.jfeather.NPC.GenericTrader;
 
 public class GameFrame extends JFrame {
 
@@ -48,13 +52,13 @@ public class GameFrame extends JFrame {
 	 **/
 	
 	public GameFrame() {
-		JLayeredPane pane = new JLayeredPane();
+		//JLayeredPane pane = new JLayeredPane();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		contentPane = new JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		setContentPane(pane);
+		setContentPane(contentPane);
 		setTitle(TITLE);
 		pack();
 		setBackground(Color.GRAY);
@@ -71,17 +75,19 @@ public class GameFrame extends JFrame {
 		// Add the inventory terminal instance
 		InventoryTerminal it = new InventoryTerminal();
 		it.setBounds(47, 317, InventoryTerminal.WIDTH, InventoryTerminal.HEIGHT);
-
+		
 		ContextTerminal ct = new ContextTerminal();
 		ct.setBounds(538, 25, ContextTerminal.WIDTH, ContextTerminal.HEIGHT);
 		
 		// Add the terminal panels that constitute the game GUI
 		GraphicsPanel gp = new GraphicsPanel();
 		gp.setBounds(0, 0, getWidth(), getHeight());
-		add(gp, 0);
+		add(gp, 2);
 		add(it, 1);
 		add(ct, 1);
+		ct.getDialoguePanel().addNPC(new GenericTrader());
+		//Contour path = new Contour("path.png");
+		//System.out.println(path.getCoords().toString());
 		
-
 	}
 }

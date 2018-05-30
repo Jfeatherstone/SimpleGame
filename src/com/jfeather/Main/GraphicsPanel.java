@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.jfeather.Context.ContextTerminal;
+import com.jfeather.Game.GameTerminal;
 
 public class GraphicsPanel extends JPanel {
 
@@ -26,6 +27,11 @@ public class GraphicsPanel extends JPanel {
 	private JLabel combatTerminal;
 	private JLabel inventoryTerminal;
 	
+	private JPanel graphicFadePanel;
+	private JPanel contextFadePanel;
+	private JPanel combatFadePanel;
+	private JPanel inventoryFadePanel;
+	
 	private JLabel contextWire;
 	private JLabel combatWire;
 	private JLabel inventoryWire;
@@ -33,7 +39,6 @@ public class GraphicsPanel extends JPanel {
 	public GraphicsPanel() {
 		setPreferredSize(new Dimension(GameFrame.WIDTH, GameFrame.HEIGHT));
 		setLayout(null);
-		//setBackground(Color.GRAY);
 		setOpaque(false);
 		
 		graphicTerminalScreen = new JLabel(new ImageIcon("Sprites/Display/GraphicsFrameScreen.png"));
@@ -72,9 +77,17 @@ public class GraphicsPanel extends JPanel {
 		inventoryWire.setBounds(0, 0, GameFrame.WIDTH, GameFrame.HEIGHT);
 		add(inventoryWire);
 		
+		//initFadePanels();
 	}
 	
 	public void animateInventoryWire() {
 		inventoryWire.setIcon(new ImageIcon("Sprites/Display/InventoryWire.gif"));
+	}
+	
+	// TODO: major WIP here, because the graphic panel just updates over this panel
+	public void initFadePanels() {
+		graphicFadePanel = new JPanel();
+		graphicFadePanel.setBounds(55, 36, GameTerminal.WIDTH, GameTerminal.HEIGHT);
+		add(graphicFadePanel);
 	}
 }

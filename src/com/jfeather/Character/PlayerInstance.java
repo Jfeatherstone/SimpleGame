@@ -139,7 +139,7 @@ public class PlayerInstance {
 			y += dy;
 	}
 	
-    public void updateSprite(Graphics g, JPanel dialog) {
+    public void updateSprite(Graphics g) {
     	imageCount++;
     	//System.out.println(imageCount);
     	if (imageCount > 16)

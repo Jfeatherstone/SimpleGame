@@ -20,7 +20,7 @@ public class InventoryTerminal extends JPanel implements MouseListener {
 	public static final int HEIGHT = 56;
 	public static final int SLOTS = 8;
 	private JButton[] buttons;
-	private int slotPress;
+	private int slotPress, slotRelease;
 	
 	public InventoryTerminal() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -156,11 +156,11 @@ public class InventoryTerminal extends JPanel implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO This detection method doesn't quite work
-		int releaseSlot = -1;
+		slotRelease = -1;
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] == e.getComponent()) {
 				System.out.println(i + 1);
-				releaseSlot = i;
+				slotRelease = i;
 			}
 		}
 
