@@ -20,6 +20,12 @@ import com.jfeather.Game.GameTerminal;
 
 public class LevelInstance {
 
+	public static final int LEFT_EXIT = 0;
+	public static final int RIGHT_EXIT = 1;
+	public static final int BOTTOM_EXIT = 2;
+	public static final int TOP_EXIT = 3;
+	public static final int MIDDLE_EXIT = 4;
+	
 	private HashMap<Integer, Image> sprites;
 	private HashMap<Integer, ArrayList<Integer>> spriteLocations;
 	private HashMap<Integer, Image> obstacles;
@@ -27,11 +33,17 @@ public class LevelInstance {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Integer> obstaclePointsX;
 	private ArrayList<Integer> obstaclePointsY;
-	private int spriteCount, obstacleCount, pointCount;
+	private int spriteCount, obstacleCount, pointCount, numberOfExits;
 	private int x, y, dx, dy;
 	private PlayerInstance player;
+	private boolean[] exits;
+	
+	private final int[][] exitCoordinates = {{12, 89}, {399, 89}, {205, 160}, {205, 8}, {205, 89}}; // Note: these are the CENTERS of the image, not the actual coordinates
+	private final Image exitImage = new ImageIcon("Sprites/Level/Exit.png").getImage();
+	private final String[] exitLocations = {"Left", "Right", "Bottom", "Top", "Middle"};
 	
 	public LevelInstance(PlayerInstance newPlayer) {
+		exits = new boolean[5];
 		player = newPlayer;
 		sprites = new HashMap<>();
 		spriteLocations = new HashMap<>();
@@ -41,8 +53,9 @@ public class LevelInstance {
 		obstaclePointsY = new ArrayList<>();
 		enemies = new ArrayList<>();
 		pointCount = 0;
-		//setBackgroundTile(new ImageIcon("Sprites/Level/BackgroundTiles/Tile.png").getImage());
-		setTerrain(new ImageIcon("Sprites/terrain.png").getImage());
+		
+		setBackgroundTile(new ImageIcon("Sprites/Level/BackgroundTiles/Tile.png").getImage());
+		//setTerrain(new ImageIcon("Sprites/terrain.png").getImage());
 	}
 	
 	public int getdX() {
@@ -138,6 +151,12 @@ public class LevelInstance {
     		Image image = nextObstacle.getValue();
     		g2d.drawImage(image, x, y, null);
     	}
+    	
+    	for (int i = 0; i < exits.length; i++) {
+    		if (exits[i]) {
+    			g2d.drawImage(exitImage, exitCoordinates[i][0] - exitImage.getWidth(null) / 2, exitCoordinates[i][1] - exitImage.getHeight(null) / 2, null);
+    		}
+    	}
 
     }
     
@@ -159,7 +178,6 @@ public class LevelInstance {
     	int tilesAcross = (int) Math.round((double) GameTerminal.WIDTH / (double) tile.getWidth(null) + 1);
     	int tilesDown = (int) Math.round((double) GameTerminal.HEIGHT / (double) tile.getHeight(null) + 1);
     	int currX = 0, currY = 0;
-    	System.out.println(tile.getWidth(null));
     	for (int i = 0; i < tilesDown; i++) {
     		for (int j = 0; j < tilesAcross; j++) {
     			addImage(tile, currX, currY);
@@ -235,6 +253,30 @@ public class LevelInstance {
     public void updateEnemies(Graphics g) {
     	for (int i = 0; i < enemies.size(); i++) {
     		enemies.get(i).moveEnemy(g);
+    	}
+    }
+    
+    public void addExit(int exitLocation) {
+    	if (exitLocation >= 0 && exitLocation <= 4) {
+    		exits[exitLocation] = true;
+    		numberOfExits++;
+    	} else
+    		System.out.println("Invalid exit parameter, use LevelInstance variables!");
+    }
+    
+    public void checkExits() {
+    	for (int i = 0; i < exits.length; i++) {
+    		if (exits[i]) {
+    			int lowerX = exitCoordinates[i][0] - exitImage.getWidth(null) / 2;
+    			int upperX = exitCoordinates[i][0] + exitImage.getWidth(null) / 2;
+    			int lowerY = exitCoordinates[i][1] - exitImage.getHeight(null) / 2;
+    			int upperY = exitCoordinates[i][1] + exitImage.getHeight(null) / 2;
+    			
+    			if (player.getX() + player.getSprite().getWidth(null) > lowerX && player.getX() < upperX && player.getY() + player.getSprite().getHeight(null) > lowerY && player.getY() < upperY) {
+    				// TODO: make the player actually transition levels
+    				System.out.println(exitLocations[i]);
+    			}
+    		}
     	}
     }
 }

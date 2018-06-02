@@ -57,8 +57,15 @@ public class GameTerminal extends JPanel {
 		Timer gameLoop = new Timer(UPDATE_RATE, new Listener());
 		gameLoop.start();
 		
+		// Testing stuff
 		level.addEnemy(new Enemy(4, "Sprites/Player/Player.gif", new Contour("path.png")));
 		level.addEnemy(new Enemy(2, "Sprites/Player/Player.gif", new Contour("path2.png")));
+		level.addExit(LevelInstance.TOP_EXIT);
+		//level.addExit(LevelInstance.MIDDLE_EXIT);
+		level.addExit(LevelInstance.LEFT_EXIT);
+		level.addExit(LevelInstance.RIGHT_EXIT);
+		level.addExit(LevelInstance.BOTTOM_EXIT);
+
 	}
 	
 	public void initializeKeys() {
@@ -103,6 +110,7 @@ public class GameTerminal extends JPanel {
 		//g2d.drawImage(player.getSprite(), player.getX(), player.getY(), null);
 		player.move(level);
 		player.updateSprite(g);
+		level.checkExits();
 	}
 	
 	private class Listener implements ActionListener {
