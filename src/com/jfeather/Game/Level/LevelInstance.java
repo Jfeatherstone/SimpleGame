@@ -1,5 +1,6 @@
 package com.jfeather.Game.Level;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -14,6 +15,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import com.jfeather.Character.PlayerInstance;
+import com.jfeather.Entities.Enemy;
 import com.jfeather.Game.GameTerminal;
 
 public class LevelInstance {
@@ -22,6 +24,7 @@ public class LevelInstance {
 	private HashMap<Integer, ArrayList<Integer>> spriteLocations;
 	private HashMap<Integer, Image> obstacles;
 	private HashMap<Integer, ArrayList<Integer>> obstacleLocations;
+	private ArrayList<Enemy> enemies;
 	private ArrayList<Integer> obstaclePointsX;
 	private ArrayList<Integer> obstaclePointsY;
 	private int spriteCount, obstacleCount, pointCount;
@@ -36,6 +39,7 @@ public class LevelInstance {
 		obstacleLocations = new HashMap<>();
 		obstaclePointsX = new ArrayList<>();
 		obstaclePointsY = new ArrayList<>();
+		enemies = new ArrayList<>();
 		pointCount = 0;
 		//setBackgroundTile(new ImageIcon("Sprites/Level/BackgroundTiles/Tile.png").getImage());
 		setTerrain(new ImageIcon("Sprites/terrain.png").getImage());
@@ -220,4 +224,17 @@ public class LevelInstance {
     	return obstaclePointsY;
     }
 
+    public void addEnemy(Enemy newEnemy) {
+    	enemies.add(newEnemy);
+    }
+    
+    public void removeEnemy(Enemy newEnemy) {
+    	enemies.remove(newEnemy);
+    }
+    
+    public void updateEnemies(Graphics g) {
+    	for (int i = 0; i < enemies.size(); i++) {
+    		enemies.get(i).moveEnemy(g);
+    	}
+    }
 }

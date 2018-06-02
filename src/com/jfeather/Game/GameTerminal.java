@@ -16,6 +16,7 @@ import javax.swing.Timer;
 
 import com.jfeather.Character.PlayerInstance;
 import com.jfeather.Entities.Contour;
+import com.jfeather.Entities.Enemy;
 import com.jfeather.Game.Level.LevelInstance;
 
 
@@ -44,7 +45,6 @@ public class GameTerminal extends JPanel {
 	
 	private LevelInstance level;
 	private PlayerInstance player;
-	private Contour test;
 	
 	public GameTerminal(LevelInstance newLevel) {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -56,7 +56,9 @@ public class GameTerminal extends JPanel {
 		
 		Timer gameLoop = new Timer(UPDATE_RATE, new Listener());
 		gameLoop.start();
-		test = new Contour("path.png");
+		
+		level.addEnemy(new Enemy(4, "Sprites/Player/Player.gif", new Contour("path.png")));
+		level.addEnemy(new Enemy(2, "Sprites/Player/Player.gif", new Contour("path2.png")));
 	}
 	
 	public void initializeKeys() {
@@ -97,12 +99,10 @@ public class GameTerminal extends JPanel {
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		level.repaintLevel(g2d);
+		level.updateEnemies(g);
 		//g2d.drawImage(player.getSprite(), player.getX(), player.getY(), null);
 		player.move(level);
 		player.updateSprite(g);
-		
-		// Test stuff here
-		test.updateSprite(new ImageIcon("Sprites/Player/Player.gif").getImage(), g2d);
 	}
 	
 	private class Listener implements ActionListener {

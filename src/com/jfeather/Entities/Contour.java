@@ -124,7 +124,7 @@ public class Contour {
 		return newPoint;
 	}
 	
-    public void updateSprite(Image image, Graphics g) {
+    public void updateSprite(Image image, Graphics g, int speed) {
 		// TODO: Fix rotating, it gets wonky with circle shaped stuff
     	Graphics2D g2d = (Graphics2D) g;
     	
@@ -156,17 +156,25 @@ public class Contour {
 	    		angle = -45;
 	    		break;
     	}
-    	
+
     	AffineTransform og = g2d.getTransform();
-    	AffineTransform tr = AffineTransform.getRotateInstance(angle, coordinates.get(imageCount).getX() + image.getWidth(null) / 2, coordinates.get(imageCount).getY() + image.getHeight(null) / 2);
+    	AffineTransform tr = AffineTransform.getRotateInstance(Math.toRadians(angle), coordinates.get(imageCount).getX() + image.getWidth(null) / 2, coordinates.get(imageCount).getY() + image.getHeight(null) / 2);
     	g2d.setTransform(tr);
     	g2d.drawImage(image, (int) coordinates.get(imageCount).getX(), (int) coordinates.get(imageCount).getY(), null);
     	g2d.setTransform(og);
     	
-		imageCount += 5;
+		imageCount += speed;
 		if (imageCount >= pointCount)
 			imageCount = 0;
 
+    }
+    
+    public int getDirection() {
+    	return dirFacing.get(imageCount);
+    }
+    
+    public int getImageCount() {
+    	return imageCount;
     }
 
 }

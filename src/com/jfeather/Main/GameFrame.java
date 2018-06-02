@@ -25,6 +25,7 @@ import com.jfeather.Game.Level.LevelInstance;
 import com.jfeather.Game.Level.LevelParse;
 import com.jfeather.Inventory.InventoryTerminal;
 import com.jfeather.NPC.GenericTrader;
+import com.jfeather.NPC.NPC;
 
 public class GameFrame extends JFrame {
 
@@ -52,7 +53,6 @@ public class GameFrame extends JFrame {
 	 **/
 	
 	public GameFrame() {
-		//JLayeredPane pane = new JLayeredPane();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		contentPane = new JLayeredPane();
@@ -65,7 +65,7 @@ public class GameFrame extends JFrame {
 		setResizable(false);
 		Image icon = new ImageIcon("Sprites/Display/GameIcon.png").getImage();
 		setIconImage(icon);
-		 
+		
 		// Add the gameplay terminal instance
 		GameTerminal gt = new GameTerminal(new LevelInstance(new PlayerInstance(new Player("Jack"))));
 		//GameTerminal gt = new GameTerminal(LevelParse.parseLevelFromFile("TestLevel.txt", new PlayerInstance(new Player("Jack"))));
@@ -85,9 +85,7 @@ public class GameFrame extends JFrame {
 		add(gp, 2);
 		add(it, 1);
 		add(ct, 1);
-		ct.getDialoguePanel().addNPC(new GenericTrader());
-		//Contour path = new Contour("path.png");
-		//System.out.println(path.getCoords().toString());
+		ct.getDialoguePanel().addNPC(new NPC());
 		
 	}
 }
