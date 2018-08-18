@@ -1,4 +1,4 @@
-# TextAdventure
+# Simple Game
 
 Starting a new project, this one will be a less graphics intensive game (as opposed to Dungeon-Crawler) meaning that it will *hopefully* be cleaner. No idea about the story at this point, but looking for turn-based combat, with random loot (will probably be borrowed from Dungeon-Crawler)
 
